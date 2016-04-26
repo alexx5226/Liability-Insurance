@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head> </head>
     <?php
 //	Liability Insurance
 //	
@@ -23,7 +20,7 @@
 
 
 //	select db
-    mysql_select_db("liabilityinsurance");
+    mysql_select_db("liabilityinsurancev2");
 
 
 //	get data from _GET
@@ -56,7 +53,9 @@
 		liabilityinsurance  
 	WHERE 
 		cubage = '$cubage1' AND 
-                year = '$year1'    
+                year = '$year1'   
+            
+        ORDER by Date_Time 
 		
 ";
 
@@ -79,7 +78,7 @@
 //	check row count
         if ($count == 0) {
 
-//	print text for invalid code
+//	print text for invalid input
             echo '<br>';
             echo "+OK No such combination of year and cubage.";
             exit();
@@ -87,14 +86,17 @@
 
 
 //	fetch data
-        $row = mysql_fetch_array($rSelect);
+        while ($row = mysql_fetch_array($rSelect))
+        {
 
 
 //	get data
         $cubage = $row['cubage'];
         $year = $row['year'];
         $price = $row['price'];
-        echo '<br>cubage= ' . $cubage . '; ' . ' year= ' . $year . '; ' . ' price= ' . $price . ' lv';
+        $DT = $row['Date_Time'];
+        echo '<br>Date_Time= ' . $DT . '; ' . 'cubage= ' . $cubage . '; ' . 'year= ' . $year . '; ' . 'price= ' . $price . ' lv';
+        }
         echo '<br>';
         echo "+OK The price of your Liability Insurance is $price  lv";
         exit();
@@ -104,5 +106,3 @@
 //	close connection
     mysql_close($link);
     ?>
-
-</html>
