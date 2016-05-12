@@ -44,8 +44,14 @@
     $cubage = $args [0];
     $year = $args[1];
     if($fDBG == 1) echo "<br> exploded:  cubage=" . $cubage . ", year=" . $year;
-    if ($year <= 20)$year = 2000+$year;
-    else $year = 1900+$year;
+    if (($year <0)|| (($year >99)&& ($year <1921)))
+    {echo "<br> Invalid Year = $year";
+    exit();
+    }
+    else
+    {if (($year <= 20)&&($year >=0))$year = 2000+$year;
+    else if (($year >20)&&($year <=99))$year=1900+$year; 
+    }
     if($fDBG == 1) echo "<br> exploded:  cubage=" . $cubage . ", year=" . $year;
 
 
